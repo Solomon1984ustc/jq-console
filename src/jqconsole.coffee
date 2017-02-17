@@ -1094,7 +1094,11 @@ class JQConsole
         word = word[0]
         @$prompt_left.text text[...-word.length]
       else
-        @$prompt_left.text text[...-1]
+        if @isAndroid
+          @$input_source.val text[...-1]
+          @$composition.text text[...-1]
+        else
+          @$prompt_left.text text[...-1]
     else if not @$prompt_before.is EMPTY_SELECTOR
       $upper_line = @$prompt_before.children().last().detach()
       @$prompt_label.text $upper_line.children().first().text()
